@@ -44,6 +44,12 @@ namespace MegaFileSystem
                 textBox1.Text = _settings.Email;
                 maskedTextBox1.Text = new string('X', 20);
             }
+
+            maskedTextBox1.TextChanged += (s, a) =>
+            {
+                if (_settings.Hash?.Any() ?? false)
+                    _settings.Hash = null;
+            };
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -96,6 +102,8 @@ namespace MegaFileSystem
                 }
                 catch
                 {
+                    _settings.LastToken = null;
+
                     Fail("The combination of Email-address and password is invalid.");
                 }
             }

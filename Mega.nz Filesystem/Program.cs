@@ -66,7 +66,7 @@ namespace MegaFileSystem
                 settings.LastToken = null;
                 settings.Init();
 
-                if (settings != null)
+                if (settings?.LastToken != null)
                 {
                     if (conf.Exists)
                         conf.Delete();
@@ -98,6 +98,11 @@ namespace MegaFileSystem
                     Console.Write("Unmounted forcefully by user.");
 
                     settings.Unmount();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Operation canceled by user.");
                 }
             }
             catch (Exception ex)
